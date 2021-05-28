@@ -57,31 +57,7 @@ class App extends Component {
       color:'#fff'
     };
 
-    let person=null;
-
-    if(this.state.isVisible){
-        person=(<div>
-          <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, "Neel-Mungra")}
-          change={this.nameChangeHandler}
-          >His hobbies is</Person>
-
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
-        
-        </div>
-      )
-    }
-    else{
-      person=(
-        <div>
-          There is nothing here.
-        </div>
-      )
-    }
+  
 
     return (
       <div className="App">
@@ -89,8 +65,13 @@ class App extends Component {
         <button 
         onClick={this.togglePersonHandler}
         style={style}>Give Me Name!!</button>
-        
-        {person}
+        {
+          this.state.persons.map(person => {
+            return <Person 
+                    name={person.name}
+                    roll={person.roll} />
+          })    
+        }
       </div>
       
     );
