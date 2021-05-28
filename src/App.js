@@ -33,7 +33,7 @@ class App extends Component {
 
   deletePersonHandler=(idx)=>{
       // console.log("Hi I am being Deleted and My id is "+idx)
-      const persons=this.state.persons;
+      const persons=[...this.state.persons];
       persons.splice(idx,1);
       this.setState({persons:persons})
   }
