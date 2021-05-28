@@ -21,17 +21,6 @@ class App extends Component {
     isVisible:true
   }
 
-  switchNameHandler=(Name)=>{
-    // console.log("Was Called");
-    this.setState({
-      persons:[
-        {name:Name,age:12},
-        {name:"Demo",age:14},
-        {name:"Mungra",age:13},
-      ]
-    })
-  }
-
   nameChangeHandler=(event)=>{
     this.setState({
       persons:[
@@ -40,6 +29,13 @@ class App extends Component {
         {name:"Mungra",age:13},
       ]
     })
+  }
+
+  deletePersonHandler=(idx)=>{
+      // console.log("Hi I am being Deleted and My id is "+idx)
+      const persons=this.state.persons;
+      persons.splice(idx,1);
+      this.setState({persons:persons})
   }
 
   togglePersonHandler=(event)=>{
@@ -66,10 +62,11 @@ class App extends Component {
         onClick={this.togglePersonHandler}
         style={style}>Give Me Name!!</button>
         {
-          this.state.persons.map(person => {
+          this.state.persons.map( (person,idx) => {
             return <Person 
                     name={person.name}
-                    roll={person.roll} />
+                    roll={person.roll} 
+                    click={this.deletePersonHandler.bind(this,idx)}/>
           })    
         }
       </div>
