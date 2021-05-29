@@ -45,7 +45,7 @@ class App extends Component {
   }
   render() {
     const style={
-      backgroundColor:'#ff406f',
+      backgroundColor:'green',
       font:'inherit',
       border:'1px solid teal',
       padding:'16px',
@@ -53,7 +53,20 @@ class App extends Component {
       color:'#fff'
     };
 
-  
+    let person=null;
+
+    if(this.state.isVisible){
+      person=this.state.persons.map( (person,idx) => {
+        return <Person 
+                name={person.name}
+                roll={person.roll}
+                key={idx} 
+                change={this.nameChangeHandler}
+                click={(event)=>this.deletePersonHandler(idx)}/>
+      })
+    } else{
+      style.backgroundColor='red';
+    }
 
     return (
       <div className="App">
@@ -62,12 +75,7 @@ class App extends Component {
         onClick={this.togglePersonHandler}
         style={style}>Give Me Name!!</button>
         {
-          this.state.persons.map( (person,idx) => {
-            return <Person 
-                    name={person.name}
-                    roll={person.roll} 
-                    click={this.deletePersonHandler.bind(this,idx)}/>
-          })    
+          person    
         }
       </div>
       
