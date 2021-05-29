@@ -6,14 +6,17 @@ class App extends Component {
   state={
     persons:[
       {
+        id:"1",
         name:"Neel",
         age:20
       },
       {
+        id:"2",
         name:"Demo",
         age:15
       },
       {
+        id:"3",
         name:"Test",
         age:20
       }
@@ -21,13 +24,22 @@ class App extends Component {
     isVisible:true
   }
 
-  nameChangeHandler=(event)=>{
+  nameChangeHandler=(event,idx)=>{
+    const personIndex=this.state.persons.findIndex(p=>{
+      return p.id===idx;
+    })
+    
+    const person={
+      ...this.state.persons[personIndex]
+    };
+
+    person.name=event.target.value;
+
+    const persons=[...this.state.persons];
+    persons[personIndex]=person;
+
     this.setState({
-      persons:[
-        {name:event.target.value,age:12},
-        {name:"Demo",age:14},
-        {name:"Mungra",age:13},
-      ]
+      persons:persons
     })
   }
 
@@ -66,7 +78,9 @@ class App extends Component {
             return <Person 
                     name={person.name}
                     roll={person.roll} 
-                    click={this.deletePersonHandler.bind(this,idx)}/>
+                    click={this.deletePersonHandler.bind(this,idx)}
+                    key={person.id}
+                    change={(event)=>this.nameChangeHandler(event,person.id)}/>
           })    
         }
       </div>
