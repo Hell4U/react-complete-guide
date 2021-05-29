@@ -43,6 +43,7 @@ class App extends Component {
     const doesShow=this.state.isVisible;
     this.setState({isVisible:!doesShow});
   }
+  
   render() {
     const style={
       backgroundColor:'green',
@@ -53,6 +54,9 @@ class App extends Component {
       color:'#fff'
     };
 
+    
+    
+    
     let person=null;
 
     if(this.state.isVisible){
@@ -67,10 +71,19 @@ class App extends Component {
     } else{
       style.backgroundColor='red';
     }
+    const classes=[];
+    // classes.push("hello");
+    if(this.state.persons.length<=2){
+      classes.push('red');
+    } 
+    if(this.state.persons.length<=1)
+      classes.push('bold')
+      console.log(classes);
 
     return (
       <div className="App">
         <h1>This is React app</h1>
+        <p className={classes.join(' ')}>This is working! But I don't have a friking idea why?</p>
         <button 
         onClick={this.togglePersonHandler}
         style={style}>Give Me Name!!</button>
